@@ -96,9 +96,15 @@ router.get("/user/atras", userAtras);
 /**************FIN DE LO DE LA PANTALLA DE USUARIO ******************** */
 
 router.get("/consultaRelaciondb",async(req,res)=>{
-    const allRelaciones = await Relacion.find({}).lean();
+    const motos_cias = await Relacion.find({}).populate("moto cia");
+    const motos_cias_tr = motos_cias.map((mct)=>({
+      moto:mct.moto.modelo,
+      cia:mct.cia.caracteristica,
+      peso:mct.peso,
+    }));
   const allMotos = await Moto.find({}).lean();
   const allCias = await Cia.find({}).lean();
-  res.render("consultRelacion",{allCias,allMotos,allRelaciones});
+  res.render("consultRelacion",{allCias,allMotos,motos_cias_tr});
+  console.log(motos_cias_tr);
 })
 export default router;
