@@ -59,14 +59,26 @@ class="div-main-index"
 const caracteristicasArray = [];
 
 function agregarPeso() {
-   const ciaSelect = document.getElementById("ciaSelect");
+  const ciaSelect = document.getElementById("ciaSelect");
   const selectedCiaOption = ciaSelect.options[ciaSelect.selectedIndex];
   const listaCaracteristica = document.getElementById("lista-caracteristica");
   const ciaValue = selectedCiaOption.value;
 
+  if (caracteristicasArray.includes(ciaValue)) {
+    alert("¡Esta característica ya ha sido seleccionada!");
+    solopeso();
+    return; // Detener la ejecución si la característica ya está en el array.
+  }
+
   if (ciaValue !== "") {
     const listItemCia = document.createElement("li");
     listItemCia.textContent = ciaValue;
+
+    // Agrega un manejador de eventos al elemento de la lista para eliminarlo al hacer clic.
+    listItemCia.addEventListener("click", function () {
+      eliminarCaracteristica(this, ciaValue);
+    });
+
     listaCaracteristica.appendChild(listItemCia);
     caracteristicasArray.push(ciaValue); // Agrega la característica al array
   }
@@ -74,6 +86,20 @@ function agregarPeso() {
   // Actualiza los campos ocultos con los datos actuales
   document.getElementById("caracteristicasField").value = JSON.stringify(caracteristicasArray);
   console.log("caracteristica: " + ciaValue);
+}
+
+function eliminarCaracteristica(elemento, ciaValue) {
+  // Elimina el elemento de la lista visual.
+  elemento.remove();
+
+  // Elimina la característica del array.
+  const index = caracteristicasArray.indexOf(ciaValue);
+  if (index !== -1) {
+    caracteristicasArray.splice(index, 1);
+  }
+
+  // Actualiza el campo oculto con los datos actualizados.
+  document.getElementById("caracteristicasField").value = JSON.stringify(caracteristicasArray);
 }
 
 function eliminarPeso() {

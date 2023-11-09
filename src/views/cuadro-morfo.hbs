@@ -94,7 +94,7 @@
       </style>
       <div class="Selecciones-2btns">
         <div class="contentListas">
-          
+
            <!-- Opcion de la cia -->
           <div>
             <!-- Opcion de la caracteristica -->
@@ -145,7 +145,9 @@ function agregarPeso() {
     // Crear un nuevo elemento <li> para mostrar el peso.
     const listItemPeso = document.createElement("li");
     listItemPeso.textContent = pesoValue;
-
+listItemPeso.addEventListener("click", function () {
+      eliminarCaracteristica(this, pesoValue);
+    });
     // Agregar el nuevo elemento de la lista de pesos.
     listaPeso.appendChild(listItemPeso);
 
@@ -170,11 +172,22 @@ function agregarPeso() {
     console.log(elemento); // Muestra cada elemento del array
   });
 
+if (caracteristicasArray.includes(ciaValue)) {
+    alert("¡Esta característica ya ha sido seleccionada!");
+     solopeso();
+    return; // Detener la ejecución si la característica ya está en el array.
+  }
+
   // Verificar si el valor seleccionado en el elemento "ciaSelect" no está vacío.
-  if (ciaValue !== "") {
+  if (ciaValue !== "" ) {
     // Crear un nuevo elemento <li> para mostrar la característica.
     const listItemCia = document.createElement("li");
     listItemCia.textContent = ciaValue;
+
+ // Agrega un manejador de eventos al elemento de la lista para eliminarlo al hacer clic.
+    listItemCia.addEventListener("click", function () {
+      eliminarCaracteristica(this, ciaValue);
+    });
 
     // Agregar el nuevo elemento a la lista de características.
     listaCaracteristica.appendChild(listItemCia);
@@ -192,6 +205,30 @@ function agregarPeso() {
   console.log(pesosArray);
 }
 
+function eliminarCaracteristica(elemento, ciaValue) {
+  // Elimina el elemento de la lista visual de características.
+  elemento.remove();
+
+  // Elimina la característica del array.
+  const index = caracteristicasArray.indexOf(ciaValue);
+  if (index !== -1) {
+    caracteristicasArray.splice(index, 1);
+  }
+
+  // Elimina el elemento correspondiente de la lista visual de pesos.
+  const listaPeso = document.getElementById("lista-peso");
+  const elementoPeso = listaPeso.children[index];
+  if (elementoPeso) {
+    elementoPeso.remove();
+  }
+
+  // Elimina el peso del array.
+  pesosArray.splice(index, 1);
+
+  // Actualiza los campos ocultos con los datos actualizados.
+  document.getElementById("caracteristicasField").value = JSON.stringify(caracteristicasArray);
+  document.getElementById("pesosField").value = JSON.stringify(pesosArray);
+}
 
 function eliminarPeso() {
   const listaCaracteristica = document.getElementById("lista-caracteristica");
@@ -220,7 +257,20 @@ function eliminarPeso() {
     document.getElementById("pesosField").value = JSON.stringify(pesosArray);
   }
 }
-         
+function solopeso(){
+   const listaPeso = document.getElementById("lista-peso");
+  
+  if (pesosArray.length > 0) {
+    // Elimina el último elemento de la lista
+    listaPeso.removeChild(listaPeso.lastChild);
+
+    // Elimina el último elemento del array
+    pesosArray.pop();
+
+    // Actualiza los campos ocultos con los datos actuales
+    document.getElementById("pesosField").value = JSON.stringify(pesosArray);
+  }
+}
 function updateMotoInfo(selectElement) {
   // Obtiene la opción seleccionada del elemento select.
   const selectedOption = selectElement.options[selectElement.selectedIndex];
