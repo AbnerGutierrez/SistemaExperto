@@ -1,0 +1,29 @@
+<div class="content-div-main-index">
+  <div class="div-main-index" style="flex-direction:column; color:#fff;">
+    <h2>Agregar una nueva caracteristica</h2>
+    <form
+      action="/entrar/login/motosp/insertar/cia"
+      method="POST"
+      enctype="multipart/form-data"
+      class="form-add-moto"
+    >
+
+      <div class="nueva-moto">
+        <div class="content-nueva-moto">
+          <input style="padding:10px 10px;" type="text" name="caracteristica" placeholder="Caracteristica" />
+          <textarea
+          style="padding:10px 10px;" 
+            name="descripcion"
+            placeholder="Agregar descripcion de la caracteristica"
+          ></textarea>
+          <input type="file" name="imagenMoto" style="border: 1px solid #fff;" />
+        </div>
+      </div>
+
+      <button style="margin:10px 20px;" class="btns">Agregar</button>
+    </form>
+
+    <a href="/preInsertar/caracteristicas" class="btns">cancelar</a>
+  </div>
+
+</div>

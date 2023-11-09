@@ -1,0 +1,55 @@
+<div class="content-div-main-index">
+  <div class="div-main-index">
+    <div
+      class="entrar"
+      style="
+    display:flex; flex-direction:column;
+    height:80%; justify-content:space-around;
+    "
+    >
+      <a
+        href="/entrar/login/get"
+        class="btns"
+        data-title="Este boton te permite entrar a la seccion de agregar una moto"
+      >Agregar moto</a>
+      <a
+        href="/preInsertar/caracteristicas"
+        class="btns"
+        data-title="Este boton te permite entrar a la seccion de agregar caracteristicas"
+      >Agregar caracteristicas</a>
+      <a
+        href="/cuadro"
+        class="btns"
+        data-title="Este boton te permite ir aal cuadro morfologico"
+      >Cuadro morfologico</a>
+      <a data-title="Salir a la interfaz anterior" href="/entrar" class="btns">salir</a>
+    </div>
+     <div style=""><textarea
+      style="resize:none;
+             width:350px;
+             height:250px;
+             font-size:30px;"
+      name=""
+      id="msjArea"
+    ></textarea></div>
+
+  </div>
+
+</div>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+  const links = document.querySelectorAll(".btns");
+  const textarea = document.getElementById("msjArea");
+
+  links.forEach(link => {
+    link.addEventListener("mouseover", function() {
+      const title = this.getAttribute("data-title");
+      textarea.value = title;
+    });
+
+    link.addEventListener("mouseout", function() {
+      textarea.value = "";
+    });
+  });
+});
+</script>

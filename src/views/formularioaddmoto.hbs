@@ -1,0 +1,29 @@
+<div class="content-div-main-index">
+  <div class="div-main-index" style="flex-direction:column; color:#fff;">
+    <h2>Agregar una nueva moto</h2>
+    <form
+      action="/entrar/login/motosp/insertar"
+      method="POST"
+      enctype="multipart/form-data"
+      class="form-add-moto"
+    >
+
+      <div class="nueva-moto">
+        <div class="content-nueva-moto">
+          <input style="padding:10px 10px;" type="text" name="modelo" placeholder="Modelo de moto" />
+          <textarea
+          style="padding:10px 10px;" 
+            name="descripcionMoto"
+            placeholder="Agregar descripcion de la moto"
+          ></textarea>
+          <input type="file" name="imagenMoto" style="border: 1px solid #fff;" />
+        </div>
+      </div>
+
+      <button style="margin:10px 20px;" class="btns">Agregar</button>
+    </form>
+
+    <a href="/entrar/login/get" class="btns">cancelar</a>
+  </div>
+
+</div>

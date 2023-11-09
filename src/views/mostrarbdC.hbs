@@ -1,0 +1,21 @@
+<h2>Aqui para mostrar todos los datos de la base de datos</h2>
+<a href="/preInsertar/caracteristicas">Regresar</a>
+  <div  >
+      <table>
+  
+   <tr>
+    <th>Caracteristica</th>
+    <th>Descripcion</th>
+    <th>id</th>
+    <th>Ruta imagen</th>
+   </tr>
+    {{#each allCias}}
+   <tr>
+    <td>{{caracteristica}}</td>
+    <td>{{descripcion}}</td>
+    <td>{{_id}}</td>
+    <td>{{path}}</td>
+   </tr>
+   {{/each}}
+   </table>
+  </div>

@@ -1,0 +1,55 @@
+<div class="content-div-main-index" style="overflow: hidden;">
+  <div class="div-main-index" style="flex-direction: column;">
+    <!--CONTENEDOR DE LAS MOTOS-->
+    <div class="content-moto">
+      <div class="contentSlider">
+        <div class="content-moto-2 slider">
+          {{#each todasLasCias}}
+            <div class="content-card">
+              <div class="card-moto sliderSection">
+                <div class="details-moto">
+
+                  <div
+                    style="display: flex; flex-direction:column; width:50%; gap:20px"
+                  >
+                    <h3>Caracteristica: "{{caracteristica}}"</h3>
+                    <p>Descripcion : {{descripcion}}</p>
+                    <p>ID:{{_id}}</p>
+                  </div>
+                  <div style="width:50%;">
+                    <img class="img-motos" src="/{{path}}" alt="" />
+                  </div>
+                </div>
+                <div class="content-btn-moto">
+                  <a
+                    href="/preInsertar/cia/{{this._id}}/delete"
+                    class="btns-card"
+                  >Eliminar</a>
+                  <a
+                    href="/entrar/login/get/{{this._id}}/editar/cia"
+                    class="btns-card"
+                  >Editar</a>
+                </div>
+              </div>
+            </div>
+          {{/each}}
+
+        </div>
+        {{! <div class="btn-slider left">></div>
+        <div class="btn-slider right"><</div> }}
+      </div>
+    </div>
+    <!--CONTENEDOR DE LOS BOTONES-->
+    <div class="btns-motos">
+
+      <a href="/entrar/login/get/primera/cia"><i class="fa-solid fa-motorcycle">First cia</i> </a>
+      <a href="/entrar/login/get/ultima/cia"><i class="fa-solid fa-magnifying-glass">Last cia</i></a>
+
+      <a href="/entrar/login/motosp/insertar/cia"><i class="fa-solid fa-plus">Agregar</i></a>
+      <a href="/entrar/login/motosp/mostrarbd/cias"><i class="fa-solid fa-database">Consult</i></a>
+      <a href="/preInsertar"><i class="fa-solid fa-backward">Exit</i></a>
+
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,30 @@
+<div class="content-div-main-index" >
+  <div class="div-main-index" style="flex-direction:column; color:#fff;">
+    <h2>Editando moto</h2>
+    <form
+      action="/entrar/login/get/{{this.id}}/editar"
+      method="POST"
+      enctype="multipart/form-data"
+      class="form-add-moto"
+    >
+
+      <div class="nueva-moto">
+        <div class="content-nueva-moto">
+          <input type="text" name="modelo" placeholder="Modelo de moto" value="{{moto.modelo}}" />
+          <textarea
+            name="descripcion"
+            placeholder="{{moto.descripcion}}" 
+          >{{moto.descripcion}}</textarea>
+          <p>ruta de imagen: {{moto.path}}</p>
+        </div>
+      </div>
+
+    
+
+      <button style="margin-top: 10px;">Actualizar</button>
+    </form>
+
+    <a href="/entrar/login/get" class="btns">cancelar</a>
+  </div>
+
+</div>

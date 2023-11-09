@@ -1,0 +1,58 @@
+<div class="content-div-main-index">
+<div
+class="div-main-index"
+  style="display:flex; align-items:center; justify-content:center;
+  gap:40px"
+>
+  <div
+    class="entrar"
+    style="
+    display:flex; flex-direction:column;
+    height:80%; justify-content:space-around;
+    "
+  >
+    <a
+      href="/user/atras"
+      class="btns"
+      data-title="Este boton te permite ir a la seccion de busqueda hacia atras"
+    ><i class="fa-solid fa-magnifying-glass">Busqueda hacia atras</i></a>
+    <a
+      href=""
+      class="btns"
+      data-title="Este boton te permite ir a la seccion de busqueda hacia adelante"
+    ><i class="fa-solid fa-magnifying-glass">Busqueda hacia adelante</i></a>
+    <a
+      href=""
+      class="btns"
+      data-title="Este boton te permite entrar al modulo de explicacion"
+    ><i class="fa-solid fa-bolt-lightning">Modulo de explicacion</i></a>
+
+    <a href="/entrar" class="btns"data-title="Salir al menu principal"><i class="fa-solid fa-backward">Regresar</i></a>
+  </div>
+  <div style=""><textarea
+      style="resize:none;
+             width:350px;
+             height:250px;
+             font-size:30px;"
+      name=""
+      id="msjArea"
+    ></textarea></div>
+</div>
+</div>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+  const links = document.querySelectorAll(".btns");
+  const textarea = document.getElementById("msjArea");
+
+  links.forEach(link => {
+    link.addEventListener("mouseover", function() {
+      const title = this.getAttribute("data-title");
+      textarea.value = title;
+    });
+
+    link.addEventListener("mouseout", function() {
+      textarea.value = "";
+    });
+  });
+});
+</script>

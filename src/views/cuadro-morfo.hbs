@@ -1,0 +1,226 @@
+<style>
+  li{
+    font-weight: 600;
+    font-size:25px;
+  }
+</style>
+<div class="">
+  <div class="dormulario-cuadro">
+    <!--COMENZAR CON EL FORMULARIO DE LA RELACION-->
+    <form action="/guardar-elemento" method="POST">
+    <!-- AQUI EMPIEZA EL CONTENT DEL SELECT DE MOTOS Y CARACTERISTICAS-->
+      <div class="moto-caracteristica">
+        <div class="moto-select">
+          <select name="moto" id="motoSelect" onchange="updateMotoInfo(this)">
+            <option value="" data-img="" data-description="">Modelo</option>
+            {{#each allMotos}}
+            <option
+              value="{{this.modelo}}"
+              data-img="{{this.path}}"
+              data-description="{{this._id}}"
+            >{{this.modelo}}</option>
+            {{/each}}
+          </select>
+          <img
+            src=""
+            id="imagenMoto"
+            style="width: 150px; height: 150px; background:#c78383;"
+          />
+          <p id="descripcionMoto"></p>
+        </div>
+        <!-- AQUI EMPIEZA EL SCRIPT PARA AGREGAR LAS PROPIEDADES DE LAS MOTOS-->
+      <script>
+   
+      </script>
+<!-- AQUI TERMINA EL SCRIPT PARA AGREGAR LAS PROPIEDADES DE LAS MOTOS-->
+<!-- COMIENZO DE LO DE LAS CARACTERISTICAS TERMINA EL SCRIPT PARA AGREGAR LAS PROPIEDADES DE LAS MOTOS-->
+      <div class="caracteristicas-select">
+        <select name="cia" id="ciaSelect" onchange="updateCiaInfoo(this)">
+          <option
+            value=""
+            data-img=""
+            data-description=""
+          >Caracteristica</option>
+          {{#each allCias}}
+          <option
+            value="{{this.caracteristica}}"
+            data-img="{{this.path}}"
+            data-description="{{this._id}}"
+          >{{this.caracteristica}}</option>
+          {{/each}}
+        </select>
+        <img
+            src=""
+            id="imagenCia"
+            style="width: 150px; height: 150px; background:#c78383;"
+          />
+        <p id "descripcionCia"></p>
+      </div>
+      </div>
+        <!-- AQUI TERMINA EL CONTENT DEL SELECT DE MOTOS Y CARACTERISTICAS-->
+      <script>
+      
+      </script>
+
+      <div class="medio">
+        <label style="font-size: 25px; color:#fff; margin-left:5px">peso:</label>
+        <input type="number" name="peso" id="inputPeso" min="0"  max="100"/>
+        <label style="font-size: 25px; color:#fff; margin-left:5px">%</label>
+      </div>
+<input type="hidden" name="caracteristicas" id="caracteristicasField" value="">
+<input type="hidden" name="pesos" id="pesosField" value="">
+
+      <div class="Selecciones-2btns">
+        <div class="contentListas">
+           <!-- Opcion de la cia -->
+          <div>
+            <!-- Opcion de la caracteristica -->
+            <ul id="lista-caracteristica">
+            </ul>
+            <!-- fin de Opcion de la caracteristica -->
+          </div>
+          <!-- FIN Opcion de LA CIA -->
+
+          <!-- Opcion del peso -->
+          <div>
+            <ul id="lista-peso">
+            </ul>
+            <!-- fin Opcion del peso -->
+          </div>
+           <!-- FIN Opcion del peso -->
+        </div>
+
+        <div class="conten-btns-cm">
+          <label href="" class="btn-cm" onclick="agregarPeso()">Añadir</label><!--Aqui se agrega el peso y la cia-->
+         <label class="btn-cm" id="eliminar" onclick="eliminarPeso()">Eliminar</label>
+        </div>
+      </div>
+
+      <div class="last-btn">
+        <button class="btn-cm"name="guardar" style=" border:none; height: 30px; width:150px;">GUARDAR</button>
+        <a href="" class="btn-cm">Cancelar</a>
+        <a href="/preInsertar" class="btn-cm">Salir</a>
+        <a href="/consultaRelaciondb" class="btn-cm">Consultar</a>
+      </div>
+    </form>
+  </div>
+</div>
+
+ <script>
+ const caracteristicasArray = [];
+ const pesosArray = [];
+
+function agregarPeso() {
+  // Obtener referencias a elementos HTML y valores necesarios.
+  const inputPeso = document.getElementById("inputPeso");
+  const listaPeso = document.getElementById("lista-peso");
+  const pesoValue = inputPeso.value;
+
+  // Verificar si el valor ingresado en el input no está vacío.
+  if (pesoValue !== "") {
+    // Crear un nuevo elemento <li> para mostrar el peso.
+    const listItemPeso = document.createElement("li");
+    listItemPeso.textContent = pesoValue;
+
+    // Agregar el nuevo elemento de la lista de pesos.
+    listaPeso.appendChild(listItemPeso);
+
+    // Limpiar el input después de agregar el valor.
+    inputPeso.value = "";
+
+    // Agregar el peso al array llamado "pesosArray".
+    pesosArray.push(pesoValue);
+  }
+
+  // Obtener referencias a otros elementos HTML y valores necesarios.
+  const ciaSelect = document.getElementById("ciaSelect");
+  const selectedCiaOption = ciaSelect.options[ciaSelect.selectedIndex];
+  const listaCaracteristica = document.getElementById("lista-caracteristica");
+  const ciaValue = selectedCiaOption.value;
+
+  // Crear un array llamado "seleccionadas" que almacena las características seleccionadas.
+  const seleccionadas = caracteristicasArray;
+
+  // Iterar sobre las características seleccionadas.
+  seleccionadas.forEach(function (elemento) {
+    console.log(elemento); // Muestra cada elemento del array
+  });
+
+  // Verificar si el valor seleccionado en el elemento "ciaSelect" no está vacío.
+  if (ciaValue !== "") {
+    // Crear un nuevo elemento <li> para mostrar la característica.
+    const listItemCia = document.createElement("li");
+    listItemCia.textContent = ciaValue;
+
+    // Agregar el nuevo elemento a la lista de características.
+    listaCaracteristica.appendChild(listItemCia);
+
+    // Agregar la característica al array llamado "caracteristicasArray".
+    caracteristicasArray.push(ciaValue);
+  }
+
+  // Actualizar los campos ocultos con los datos actuales en formato JSON.
+  document.getElementById("caracteristicasField").value = JSON.stringify(caracteristicasArray);
+  document.getElementById("pesosField").value = JSON.stringify(pesosArray);
+
+  // Imprimir en la consola el array "caracteristicasArray".
+  console.log(caracteristicasArray);
+  console.log(pesosArray);
+}
+
+
+function eliminarPeso() {
+  const listaCaracteristica = document.getElementById("lista-caracteristica");
+  
+  if (caracteristicasArray.length > 0) {
+    // Elimina el último elemento de la lista
+    listaCaracteristica.removeChild(listaCaracteristica.lastChild);
+
+    // Elimina el último elemento del array
+    caracteristicasArray.pop();
+
+    // Actualiza los campos ocultos con los datos actuales
+    document.getElementById("caracteristicasField").value = JSON.stringify(caracteristicasArray);
+  }
+  /***************************************************/
+    const listaPeso = document.getElementById("lista-peso");
+  
+  if (pesosArray.length > 0) {
+    // Elimina el último elemento de la lista
+    listaPeso.removeChild(listaPeso.lastChild);
+
+    // Elimina el último elemento del array
+    pesosArray.pop();
+
+    // Actualiza los campos ocultos con los datos actuales
+    document.getElementById("pesosField").value = JSON.stringify(pesosArray);
+  }
+}
+         
+function updateMotoInfo(selectElement) {
+  // Obtiene la opción seleccionada del elemento select.
+  const selectedOption = selectElement.options[selectElement.selectedIndex];
+
+  // Obtiene referencias a los elementos HTML con id "imagenMoto" y "descripcionMoto".
+  const imagenMoto = document.getElementById("imagenMoto");
+  const descripcionMoto = document.getElementById("descripcionMoto");
+
+  // Obtiene los valores de los atributos "data-img" y "data-description" de la opción seleccionada.
+  const selectedImage = selectedOption.getAttribute("data-img");
+  const selectedDescription = selectedOption.getAttribute("data-description");
+
+  // Actualiza la fuente de la imagen y el contenido del elemento de descripción con los valores obtenidos.
+  imagenMoto.src = selectedImage;
+  descripcionMoto.textContent = selectedDescription;
+}
+
+function updateCiaInfoo(selectElement) {
+          const selectedOption = selectElement.options[selectElement.selectedIndex];
+          const imagenCia = document.getElementById("imagenCia");
+          const descripcionCia = document.getElementById("descripcionCia");
+          const selectedImage = selectedOption.getAttribute("data-img");
+          const selectedDescription = selectedOption.getAttribute("data-description");
+          imagenCia.src = selectedImage;
+          descripcionCia.textContent = selectedDescription;
+        }  
+ </script>

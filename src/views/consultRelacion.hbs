@@ -1,0 +1,28 @@
+<style>
+  table{ width: 80%; text-align: center; }
+</style>
+
+<h2>Aqui para mostrar todos los datos de la base de datos relacion</h2>
+<a href="/cuadro">Regresar</a>
+<div>
+  <table>
+
+    <tr>
+      <th>Moto</th>
+      <th>Caracteristica</th>
+      <th>peso</th>
+    </tr>
+    {{#each allRelaciones }}
+      <tr>
+
+        <td>{{moto}}</td>
+        <td>{{cia}}</td>
+        <td>{{peso}}</td>
+
+      </tr>
+      <tr>
+        <td></td>
+      </tr>
+    {{/each}}
+  </table>
+</div>
