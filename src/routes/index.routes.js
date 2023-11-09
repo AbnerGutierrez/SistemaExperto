@@ -107,4 +107,33 @@ router.get("/consultaRelaciondb",async(req,res)=>{
   res.render("consultRelacion",{allCias,allMotos,motos_cias_tr});
   console.log(motos_cias_tr);
 })
+
+router.post('/ruta/del/backend', async (req, res) => {
+  //nombre de la moto
+  
+  //const relaciones = await Relacion.find({ moto: motoId }).populate('cia');
+  try {
+    
+    const modelo_moto = req.body.motoId;
+    const moto = await Moto.findOne({modelo:modelo_moto})
+    const moto_id = moto._id;
+    // Realizar la consulta a la colección de Relaciones
+    const relaciones = await Relacion.find({ moto: moto_id }).populate('cia');
+
+    // Obtener las características de las relaciones
+    const caracteristicas = relaciones.map(relacion => {
+      return {
+        caracteristica: relacion.cia.caracteristica, // Ajusta esto según tu esquema de características
+        peso: relacion.peso,
+      };
+    });
+
+    // Enviar las características al frontend
+    res.json({ caracteristicas });
+  } catch (error) {
+    console.error('Error:', error);
+    res.status(500).json({ error: 'Error interno del servidor' });
+  }
+  
+});
 export default router;

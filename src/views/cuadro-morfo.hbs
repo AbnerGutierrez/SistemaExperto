@@ -2,6 +2,23 @@
   li{
     font-weight: 600;
     font-size:25px;
+    list-style: none;
+  }
+  .cia-c li{
+    text-align: center;
+     font-size: 20px;
+  }
+  .cia-c label{
+    display: block;
+    font-weight: 600;
+    background-color: green;
+    padding: 5px 3px;
+    text-align: center;
+    margin-bottom: 5px;
+  }
+  .cia-c label:hover{
+    cursor: pointer;
+     background-color: rgb(2, 77, 2);
   }
 </style>
 <div class="">
@@ -38,16 +55,8 @@
           height: 170px;
           background-color: rgba(3, 3, 3, 0.61);
           top:165px">
-        <table style="margin: auto; color:#fff;">
-          <tr>
-            <th>Caracteristica</th>
-          </tr>
-
-          <tr>
-            <td>caracteristica2</td>
-          </tr>
-           
-        </table>
+        <ul style="margin: auto; color:#fff;" id="caracteristicasLista" class="cia-c">
+</ul>
       </div>
 <!-- AQUI TERMINA EL SCRIPT PARA AGREGAR LAS PROPIEDADES DE LAS MOTOS-->
 <!-- COMIENZO DE LO DE LAS CARACTERISTICAS TERMINA EL SCRIPT PARA AGREGAR LAS PROPIEDADES DE LAS MOTOS-->
@@ -286,6 +295,33 @@ function updateMotoInfo(selectElement) {
   // Actualiza la fuente de la imagen y el contenido del elemento de descripción con los valores obtenidos.
   imagenMoto.src = selectedImage;
   descripcionMoto.textContent = selectedDescription;
+//obtener id de la moto seleccionada
+const selectedId = selectedOption.value;
+  fetch('/ruta/del/backend', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ motoId: selectedId }),
+  })
+    .then(response => response.json())
+    .then(data => {
+      // Manejar la respuesta del backend, por ejemplo, mostrar las características en la lista
+      mostrarCaracteristicasEnLista(data.caracteristicas);
+    })
+    .catch(error => console.error('Error:', error));
+}
+function mostrarCaracteristicasEnLista(caracteristicas) {
+  const listaCaracteristicas = document.getElementById('caracteristicasLista');
+  // Limpiar la lista antes de agregar nuevas características
+  listaCaracteristicas.innerHTML = '<label>Actualizar</label>';
+  
+  // Agregar cada característica a la lista
+  caracteristicas.forEach(caracteristica => {
+    const li = document.createElement('li');
+    li.textContent = `${caracteristica.caracteristica}: ${caracteristica.peso}`;
+    listaCaracteristicas.appendChild(li);
+  });
 }
 
 function updateCiaInfoo(selectElement) {
